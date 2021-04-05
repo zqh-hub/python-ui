@@ -5,5 +5,5 @@ error_info_middle = [
     {"username": "", "password": "", "msg": "用户名或密码错误"}
 ]
 success_login = [
-    {"username": "admin", "password": "zqh139499", "msg": "欢迎来到 Jenkins!"}
+    {"username": "admin", "password": "zqh139499", "msg": "admin"}
 ]
