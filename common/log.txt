@@ -1,3 +1,0 @@
-2021-03-28 22:56:12,304-DEBUG-log.py-zqh_log-日志信息：debug 日志
-2021-03-28 22:56:12,304-INFO-log.py-zqh_log-日志信息：info 日志
-2021-03-28 22:56:12,304-CRITICAL-log.py-zqh_log-日志信息：critical 日志
