@@ -163,6 +163,15 @@ actions.perform() # 执行
 chromeOptions = webdriver.ChromeOptions()
 chromeOptions.add_argument("--proxy-server=http://127.0.0.1:8888")
 driver = webdriver.Chrome(executable_path="F:\work\driver\chromedriver_89_0_4389_23.exe", chrome_options=chromeOptions)
+
+# 下面的方式也可以，不过我没实验成功
+PROXY = "http://127.0.0.1:8888"
+desired_capabilities = webdriver.DesiredCapabilities.CHROME["proxy"] = {'proxyType': 'MANUAL',
+                                                                        "ftpProxy": PROXY,
+                                                                        "sslProxy": PROXY,
+                                                                        'httpProxy': PROXY}
+driver = webdriver.Chrome(executable_path="F:\work\driver\chromedriver_89_0_4389_23.exe",
+                          desired_capabilities=desired_capabilities)
 ```
 ##### Select操作
 
