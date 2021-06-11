@@ -134,8 +134,7 @@ alert.send_keys("Selenium")
 alert.accept()
   
 ```
-###### ActionChains鼠标操作
-
+##### ActionChains鼠标操作
 ```python
 from selenium.webdriver.common.action_chains import ActionChains
 ActionChains(driver).move_to_element(element).perform()
@@ -159,8 +158,13 @@ actions.key_down(Keys.COMMAND).send_keys('a').key_up(Keys.COMMAND)  # 全选
 actions.key_down(Keys.COMMAND).send_keys('c').key_up(Keys.COMMAND)  # 复制
 actions.perform() # 执行
 ```
-
-Select操作
+##### http代理
+```python
+chromeOptions = webdriver.ChromeOptions()
+chromeOptions.add_argument("--proxy-server=http://127.0.0.1:8888")
+driver = webdriver.Chrome(executable_path="F:\work\driver\chromedriver_89_0_4389_23.exe", chrome_options=chromeOptions)
+```
+##### Select操作
 
 ```python
 select = Select(element)
@@ -180,7 +184,7 @@ driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")  # 底部
 driver.execute_script("window.scrollTo(document.body.scrollHeight,0)")  # 顶部
 ```
 
-JS移除属性
+##### JS移除属性
 
 ```python
 driver.execute_script("arguments[0].removeAttribute("某属性")",element)
