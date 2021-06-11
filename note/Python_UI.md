@@ -125,7 +125,15 @@ if alert:
 else:
     print("没有alert")
 ```
-
+##### Prompt 提示框
+```python
+driver.find_element(By.LINK_TEXT, "See a sample prompt").click()
+alert = Alert(driver)
+# 向提示框输入文字
+alert.send_keys("Selenium")
+alert.accept()
+  
+```
 ###### ActionChains鼠标操作
 
 ```python
