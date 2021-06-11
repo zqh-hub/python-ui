@@ -87,7 +87,7 @@ driver.switch_to.window(handles[-1])
 进去所有 ['page-23C60CC7-98C1-BECC6908EE7E', 'page-893F7E89-9B14-330B2E3F69BE']
 ```
 
-##### 等待新窗口出现
+###### 等待新窗口出现
 
 ```python
 # 一定要在新的窗口打开之前获取handles
@@ -100,7 +100,7 @@ handles = driver.window_handles
 driver.switch_to.window(handles[0])
 ```
 
-##### alert切换
+###### alert切换
 
 ```python
 alert = driver.switch_to.alert  # 切换
@@ -123,7 +123,7 @@ if alert:
 else:
     print("没有alert")
 ```
-##### Prompt 提示框
+###### Prompt 提示框
 ```python
 driver.find_element(By.LINK_TEXT, "See a sample prompt").click()
 alert = Alert(driver)
@@ -132,7 +132,7 @@ alert.send_keys("Selenium")
 alert.accept()
   
 ```
-##### ActionChains鼠标操作
+###### ActionChains鼠标操作
 ```python
 from selenium.webdriver.common.action_chains import ActionChains
 ActionChains(driver).move_to_element(element).perform()
@@ -156,7 +156,7 @@ actions.key_down(Keys.COMMAND).send_keys('a').key_up(Keys.COMMAND)  # 全选
 actions.key_down(Keys.COMMAND).send_keys('c').key_up(Keys.COMMAND)  # 复制
 actions.perform() # 执行
 ```
-##### http代理
+###### http代理
 ```python
 chromeOptions = webdriver.ChromeOptions()
 chromeOptions.add_argument("--proxy-server=http://127.0.0.1:8888")
@@ -171,7 +171,7 @@ desired_capabilities = webdriver.DesiredCapabilities.CHROME["proxy"] = {'proxyTy
 driver = webdriver.Chrome(executable_path="F:\work\driver\chromedriver_89_0_4389_23.exe",
                           desired_capabilities=desired_capabilities)
 ```
-##### Select操作
+###### Select操作
 
 ```python
 select = Select(element)
@@ -179,24 +179,24 @@ select.select_by_index()  # 通过下标
 select.select_by_value()  # 通过value属性 
 select.select_by_visible_text()  # 通过select的文本
 ```
-##### 获取焦点
+###### 获取焦点
 ```python
 # 返回的是一个元素，这个元素与通过find_element定位到的无异，可以执行send_key等方法
 ele = driver.switch_to.active_element
 
 # 参考：https://blog.csdn.net/huilan_same/article/details/52338073
 ```
-##### 判断元素是否可用
+###### 判断元素是否可用
 ```python
 # 可用返回true,不可用返回false
 val attr = driver.findElement(By.name("btnK")).isEnabled()
 ```
-##### 判断元素是否被选择
+###### 判断元素是否被选择
 ```python
 # 被选择返回true,否则为false
 val attr =  driver.findElement(By.cssSelector("input[type='checkbox']:first-of-type")).isSelected()
 ```
-##### 判断元素使用可用
+###### 判断元素使用可用
 ```python
 ```
 ###### JS 滑动页面
@@ -209,7 +209,7 @@ driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")  # 底部
 driver.execute_script("window.scrollTo(document.body.scrollHeight,0)")  # 顶部
 ```
 
-##### JS移除属性
+###### JS移除属性
 
 ```python
 driver.execute_script("arguments[0].removeAttribute("某属性")",element)
