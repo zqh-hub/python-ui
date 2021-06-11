@@ -181,7 +181,13 @@ select.select_by_index()  # 通过下标
 select.select_by_value()  # 通过value属性 
 select.select_by_visible_text()  # 通过select的文本
 ```
+##### 获取焦点
+```python
+# 返回的是一个元素，这个元素与通过find_element定位到的无异，可以执行send_key等方法
+ele = driver.switch_to.active_element
 
+# 参考：https://blog.csdn.net/huilan_same/article/details/52338073
+```
 ###### JS 滑动页面
 
 ```python
