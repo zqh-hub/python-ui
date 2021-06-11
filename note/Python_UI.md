@@ -44,13 +44,13 @@ kw_input = driver.find_element(By.XPATH, "//input[@id='kw']")
 class_atr = kw_input.get_attribute("class")
 ```
 
-隐式等待
+##### 隐式等待
 
 ```python
 driver.implicitly_wait(time) #此方法有局限性，一般不用
 ```
 
-显式等待
+###### 显式等待
 
 ```python
 WebDriverWait(driver, 等待时间,频率).until(ec.条件((元素)))
@@ -89,7 +89,7 @@ driver.switch_to.window(handles[-1])
 进去所有 ['page-23C60CC7-98C1-BECC6908EE7E', 'page-893F7E89-9B14-330B2E3F69BE']
 ```
 
-等待新窗口出现
+##### 等待新窗口出现
 
 ```python
 # 一定要在新的窗口打开之前获取handles
@@ -102,7 +102,7 @@ handles = driver.window_handles
 driver.switch_to.window(handles[0])
 ```
 
-alert切换
+##### alert切换
 
 ```python
 alert = driver.switch_to.alert  # 切换
