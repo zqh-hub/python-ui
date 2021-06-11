@@ -43,7 +43,7 @@ driver.current_window_handle
 kw_input = driver.find_element(By.XPATH, "//input[@id='kw']")
 class_atr = kw_input.get_attribute("class")
 ```
-##### 隐式等待
+###### 隐式等待
 ```python
 driver.implicitly_wait(time) #此方法有局限性，一般不用
 ```
@@ -196,8 +196,13 @@ val attr = driver.findElement(By.name("btnK")).isEnabled()
 # 被选择返回true,否则为false
 val attr =  driver.findElement(By.cssSelector("input[type='checkbox']:first-of-type")).isSelected()
 ```
-###### 判断元素使用可用
+###### 获取tagName
 ```python
+driver.find_element(By.CSS_SELECTOR, "h1").tag_name
+```
+###### 获取元素的坐标/尺寸
+```python
+driver.find_element(By.ID, "kw").rect # {'height': 44, 'width': 548, 'x': 298, 'y': 209.265625}
 ```
 ###### JS 滑动页面
 ```python
