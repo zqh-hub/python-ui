@@ -43,9 +43,7 @@ driver.current_window_handle
 kw_input = driver.find_element(By.XPATH, "//input[@id='kw']")
 class_atr = kw_input.get_attribute("class")
 ```
-
 ##### 隐式等待
-
 ```python
 driver.implicitly_wait(time) #此方法有局限性，一般不用
 ```
@@ -188,8 +186,20 @@ ele = driver.switch_to.active_element
 
 # 参考：https://blog.csdn.net/huilan_same/article/details/52338073
 ```
+##### 判断元素是否可用
+```python
+# 可用返回true,不可用返回false
+val attr = driver.findElement(By.name("btnK")).isEnabled()
+```
+##### 判断元素是否被选择
+```python
+# 被选择返回true,否则为false
+val attr =  driver.findElement(By.cssSelector("input[type='checkbox']:first-of-type")).isSelected()
+```
+##### 判断元素使用可用
+```python
+```
 ###### JS 滑动页面
-
 ```python
 # 将ele移动到可视区域，元素顶部[底部]与浏览器顶部[底部]对齐
 driver.execute_script("arguments[0].scrollIntoView([false]);", element)
