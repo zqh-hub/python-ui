@@ -179,7 +179,8 @@ ActionChains(driver).move_to_element(element).perform()
 
 ```python
 element.send_keys("1234")
-
+# 输入123，并按enter键
+ele.send_keys("1234"+Keys.ENTER)
 actions.key_down(Keys.COMMAND).send_keys('a').key_up(Keys.COMMAND)  # 全选
 actions.key_down(Keys.COMMAND).send_keys('c').key_up(Keys.COMMAND)  # 复制
 actions.perform() # 执行
