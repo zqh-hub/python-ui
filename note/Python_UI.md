@@ -311,6 +311,27 @@ None：
 driver.add_cookie({"name": "foo", "value": "value", 'sameSite': 'Strict'})
 driver.add_cookie({"name": "foo1", "value": "value", 'sameSite': 'Lax'})
 ```
+###### 
+```python
+# 参考：https://zhuanlan.zhihu.com/p/363008064
+
+from browsermobproxy import Server
+from selenium import webdriver
+
+server = Server(r"F:\work\driver\browsermob-proxy-2.1.4\bin\browsermob-proxy.bat")
+server.start()
+proxy = server.create_proxy()
+options = webdriver.ChromeOptions()
+options.add_argument('--proxy-server={0}'.format(proxy.proxy))
+options.add_argument('--ignore-certificate-errors')
+options.add_experimental_option("excludeSwitches", ["ignore-certificate-errors"])
+driver = webdriver.Chrome(executable_path="F:\\work\\driver\\chromedriver.exe", options=options)
+proxy.new_har("my_test", options={'captureHeaders': True, 'captureContent': True})
+driver.get("https://www.baidu.com")
+res = proxy.har
+with open("proxy_res.txt", 'w', encoding="utf-8") as f:
+    f.write(str(res))
+```
 ###### logging
 
 ```python
