@@ -248,7 +248,16 @@ def upload_file_by_win32(file_path):
     win32gui.SendMessage(edit, win32con.WM_SETTEXT, None, file_path)
     win32gui.SendMessage(dialog, win32con.WM_COMMAND, 1, button)
 ```
+###### cookie操作
+```python
+driver.add_cookie({"name": "key", "value": "value"})
+driver.get_cookie("foo")  # 获取指定的字段
+driver.get_cookies()  # 获取全部
 
+driver.delete_cookie("test1")  # [{'name': 'test2', 'path': '/'}, {'name': 'test1', 'path': '/'}] 删除后：只有name=test2的了
+
+driver.delete_all_cookies() # 删除所有
+```
 ###### logging
 
 ```python
