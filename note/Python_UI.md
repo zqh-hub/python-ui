@@ -257,6 +257,40 @@ driver.get_cookies()  # 获取全部
 driver.delete_cookie("test1")  # [{'name': 'test2', 'path': '/'}, {'name': 'test1', 'path': '/'}] 删除后：只有name=test2的了
 
 driver.delete_all_cookies() # 删除所有
+
+# 例子：
+# getcookie.py
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+driver = webdriver.Chrome("F:\work\driver\chromedriver_89_0_4389_23.exe")
+driver.get("https://www.tapd.cn/cloud_logins/login")
+driver.find_element(By.ID, "username").send_keys("zhaoqinghe@tecpie.com")
+driver.find_element(By.ID, "password_input").send_keys("Zqh139499")
+driver.find_element(By.ID, "tcloud_login_button").click()
+cookies = driver.get_cookies()
+print(type(cookies))
+with open("cookie.txt", "w") as f:
+    f.write(str(cookies))
+
+driver.quit()
+
+# addcookie.py
+import time
+
+from selenium import webdriver
+
+with open("cookie.txt", "r") as f:
+    data = f.read()
+cookies = eval(data)
+driver = webdriver.Chrome("F:\work\driver\chromedriver_89_0_4389_23.exe")
+driver.get("https://www.tapd.cn/my_worktable#&filter_close=true")
+driver.maximize_window()
+for i in cookies:
+    driver.add_cookie(i)
+
+driver.refresh()	# 这里一定要刷新
+driver.quit()
 ```
 ###### logging
 
