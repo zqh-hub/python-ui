@@ -292,6 +292,25 @@ for i in cookies:
 driver.refresh()	# 这里一定要刷新
 driver.quit()
 ```
+###### Same-Site Cookie属性
+```python
+# Same-Site的作用
+在实际操作中，我们在“知乎”上可能会要点击链接跳转到第三方的网站，这样，如果第三方是恶意网站，就会泄露信息。Same-Site 就是用来限制是否发送给第三方网站信息
+# 三个参数
+Strict：
+	最为严格，完全禁止第三方 Cookie，跨站点时，任何情况下都不会发送 Cookie
+	Set-Cookie: CookieName=CookieValue; SameSite=Strict;
+Lax：
+	规则稍稍放宽，大多数情况也是不发送第三方 Cookie，但是导航到目标网址的 Get 请求除外
+	Set-Cookie: CookieName=CookieValue; SameSite=Lax;
+None：
+	Chrome 计划将Lax变为默认设置。这时，网站可以选择显式关闭SameSite属性，将其设为None。不过，前提是必须同时设置Secure属性（Cookie 只能通过 HTTPS 协议发送），否则无效
+	Set-Cookie: widget_session=abc123; SameSite=None; Secure
+	
+# selenium
+driver.add_cookie({"name": "foo", "value": "value", 'sameSite': 'Strict'})
+driver.add_cookie({"name": "foo1", "value": "value", 'sameSite': 'Lax'})
+```
 ###### logging
 
 ```python
