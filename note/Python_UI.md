@@ -248,6 +248,30 @@ def upload_file_by_win32(file_path):
     win32gui.SendMessage(edit, win32con.WM_SETTEXT, None, file_path)
     win32gui.SendMessage(dialog, win32con.WM_COMMAND, 1, button)
 ```
+
+###### selenium控制已经登陆的网站
+```python
+# 此针对的是mac
+# 第一步,打开chrome的debug模式
+vim .zprofile
+PATH="/Applications/Google Chrome.app/Contents/MacOS:${PATH}"
+export PATH
+
+命令行运行：
+Google\ Chrome -remote-debugging-port=9222   # 注意，运行前要把浏览器的所有进行都关闭
+
+# python脚本
+options = webdriver.ChromeOptions()
+options.debugger_address = "127.0.0.1:9222"    # debug地址
+driver = webdriver.Chrome(path_config.CHROME_DRIVER_PATH, options=options)
+driver.maximize_window()
+driver.get("https://situnionpay-dashboard.pinpula.com/admin/index")
+time.sleep(3)
+driver.find_element(By.XPATH, "//span[text()='基础功能']").click()
+
+time.sleep(3)
+driver.quit()
+```
 ###### cookie操作
 ```python
 driver.add_cookie({"name": "key", "value": "value"})
