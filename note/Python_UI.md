@@ -135,6 +135,8 @@ alert = driver.switch_to.alert  # 切换
 alert.accept()  # 接受
 alert.dismiss() # 取消
 alert.text # 获取文本
+# 有时，使用.text获取不到文本值，可以使用ele.get_attribute("textContent")尝试
+
 ```
 
 ###### 等待alert
