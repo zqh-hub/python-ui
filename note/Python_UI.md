@@ -358,6 +358,82 @@ res = proxy.har
 with open("proxy_res.txt", 'w', encoding="utf-8") as f:
     f.write(str(res))
 ```
+###### 破解滑动验证码
+```python
+# 参考
+# 参考：https://www.cnblogs.com/zgn1666818478/p/13151052.html     https://www.cnblogs.com/lmx123/p/9246215.html
+import time
+from collections import Counter
+from functools import reduce
+
+import cv2
+from PIL import Image
+from selenium import webdriver
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
+
+driver = webdriver.Chrome("/Users/coco/Documents/YZT/unionpay_ui/driver/chromedriver")
+driver.maximize_window()
+driver.get("https://situnionpay-dashboard.pinpula.com/admin/login")
+driver.find_element(By.XPATH, "//input[@id='phone']").send_keys("15518612123")
+driver.find_element(By.XPATH, "//span[text()='获取验证码']/parent::button").click()
+time.sleep(1)
+img = driver.find_element(By.XPATH, "//div[@class='verify-img-panel']")
+location = img.location
+size = img.size
+print(location, size)
+left, up = location["x"] * 2, location["y"] * 2
+right, down = left + size["width"] * 2, up + size["height"] * 2
+driver.save_screenshot("all_img.png")
+all_img = Image.open("all_img.png")
+img_ver = all_img.crop((left, up, right, down))
+img_ver.save("captcha.png")
+
+''' -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- '''
+img = cv2.imread("captcha.png", 0)
+img = cv2.GaussianBlur(img, (3, 3), 0)
+canny = cv2.Canny(img, 200, 600)
+x_len, y_len = canny.shape
+x_arr = []
+for i in range(1, x_len):
+    for j in range(1, y_len):
+        if canny[i, j] == 255:
+            x_arr.append(j)
+print("顺序打印看一下：", sorted(x_arr))
+# 根据频率统计得到缺口距离y轴距离
+former_dict = Counter(x_arr).most_common(5)
+distance = max(dict(former_dict).keys()) + 17
+print("distance = ", distance)
+''' -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- '''
+track = []
+current = 0  # 当前位移
+mid = distance * 4 / 5  # 设定一个阈值进行改变加速度
+t = 1  # 计算间隔
+v = 0  # 初速度
+while current < distance:
+    if current < mid:
+        a = 1  # 加速度为正1
+    else:
+        a = -2  # 加速度为负2
+    v0 = v  # 初速度v0
+    v = v0 + a * t  # 当前速度v = v0 + at
+    # 移动距离x = v0t + 1/2 * a * t^2
+    move = v0 * t + 1 / 2 * a * t * t
+    current += move  # 当前位移
+    track.append(round(move))  # 加入轨迹
+
+''' -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- '''
+drag = driver.find_element(By.XPATH, "//div[@class='verify-move-block']")
+ActionChains(driver).click_and_hold(drag).perform()
+filter_track = list(filter(lambda x: x > 0, track))
+print("过滤掉为0的轨迹列表：", filter_track)
+print("reduce获取到和值：", reduce(lambda x, y: x + y, track))
+for dis in track[:-12]:
+    ActionChains(driver).move_by_offset(xoffset=dis, yoffset=0).perform()
+ActionChains(driver).release(drag).perform()
+time.sleep(4)
+
+```
 ###### logging
 
 ```python
