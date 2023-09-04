@@ -11,11 +11,29 @@ driver.get("https://www.baidu.com")
 driver.quit()
 
 注意：最新版本的selenium不需要再指定driver的路径，直接访问即可
+# seleium 4.x
 from selenium import webdriver
 web = webdriver.Chrome()
 web.get("https://blog.csdn.net/")
 ```
+###### 加载策略
+|策略｜解释
+--|--
+none|等待html下载完成，不等待解析完成就开始执行操作，selenium 会直接返回
+eager|等待HTML 完全加载和解析完毕就开始执行操作，忽略加载样式表、图像和子框架
+normal|等待整个页面加载完毕再开始执行操作
+```python
+# selenium 4.x
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
+options = Options()
+options.page_load_strategy = "normal"
+web = webdriver.Chrome(options=options)
+web.get("https://blog.csdn.net/")
+
+web.quit()
+```
 ###### 访问操作
 
 ```python
