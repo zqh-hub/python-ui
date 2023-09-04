@@ -17,8 +17,8 @@ web = webdriver.Chrome()
 web.get("https://blog.csdn.net/")
 ```
 ###### 加载策略
-|策略｜解释
---|--
+|策略|解释|
+|--|--|
 none|等待html下载完成，不等待解析完成就开始执行操作，selenium 会直接返回
 eager|等待HTML 完全加载和解析完毕就开始执行操作，忽略加载样式表、图像和子框架
 normal|等待整个页面加载完毕再开始执行操作
