@@ -9,6 +9,11 @@ from selenium import webdriver
 driver = webdriver.Safari()
 driver.get("https://www.baidu.com")
 driver.quit()
+
+注意：最新版本的selenium不需要再指定driver的路径，直接访问即可
+from selenium import webdriver
+web = webdriver.Chrome()
+web.get("https://blog.csdn.net/")
 ```
 
 ###### 访问操作
