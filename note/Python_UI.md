@@ -34,6 +34,19 @@ web.get("https://blog.csdn.net/")
 
 web.quit()
 ```
+###### 去除chrome上的“Chrome提示受到自动软件控制”
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+options = Options()
+# options.add_argument("--disable-infobars") 新版本已失效
+options.add_experimental_option("excludeSwitches", ["enable-automation"])
+options.add_experimental_option('useAutomationExtension', False)
+
+web = webdriver.Chrome(options=options)
+web.get("https://blog.csdn.net/")
+```
 ###### 访问操作
 
 ```python
